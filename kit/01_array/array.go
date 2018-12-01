@@ -57,3 +57,28 @@ func (this *Array) InsertToIndex(index uint, v int) error {
 	this.length++
 	return nil
 }
+
+// 增加数据
+func (this *Array) InsertToTail(v int) error {
+	return this.InsertToIndex(this.Len(), v)
+}
+
+// 删除指定索引的数据
+func (this *Array) Delete(index uint) (int, error) {
+	if this.isIndexOutOfRange(index) {
+		return 0, errors.New("out of index range")
+	}
+	v := this.data[index]
+	for i := index; i < this.Len()-1; i++ {
+		this.data[i] = this.data[i+1]
+	}
+	this.length--
+	return v, nil
+}
+
+// 打印数组
+func (this *Array) Print() {
+	for i := uint(0); i < this.Len(); i++ {
+		fmt.Println(this.data[i])
+	}
+}

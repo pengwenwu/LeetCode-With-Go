@@ -5,6 +5,14 @@ import (
 	"fmt"
 )
 
+/*
+通过索引查找数组
+在指定索引插入数据
+尾部追加数据
+删除指定索引数据
+打印数组
+*/
+
 // 定义
 type Array struct {
 	data   []int

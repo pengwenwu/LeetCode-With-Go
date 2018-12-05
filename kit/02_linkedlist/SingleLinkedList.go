@@ -144,3 +144,25 @@ func (this *LinkedList) Print() {
 	}
 	fmt.Println(format)
 }
+
+// 判断是否是回文字符串
+// func IsPalindrome(l *LinkedList) bool {
+
+// }
+
+// 翻转链表
+func (this *LinkedList) ReverseLinkedList() {
+	if nil == this.head || nil == this.head.next || nil == this.head.next.next {
+		return
+	}
+	pre := this.head.next
+	cur := this.head.next.next
+	pre.next = nil
+	for nil != cur {
+		tmp := cur.next
+		cur.next = pre
+		pre = cur
+		cur = tmp
+	}
+	this.head.next = pre
+}

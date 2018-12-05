@@ -14,8 +14,9 @@ func TestInsertToHead(t *testing.T) {
 
 func TestInsertToTail(t *testing.T) {
 	l := NewLinkedList()
-	for i := 0; i < 10; i++ {
-		l.InsertToTail(i * i)
+	str := "hello"
+	for _, v := range str {
+		l.InsertToTail(string(v))
 	}
 	l.Print()
 }
@@ -53,5 +54,16 @@ func TestDeleteNode(t *testing.T) {
 	l.Print()
 
 	t.Log(l.DeleteNode(l.head.next.next))
+	l.Print()
+}
+
+func TestReverseLinkedList(t *testing.T) {
+	l := NewLinkedList()
+	str := "hello"
+	for _, v := range str {
+		l.InsertToTail(string(v))
+	}
+	l.Print()
+	l.ReverseLinkedList()
 	l.Print()
 }

@@ -78,3 +78,14 @@ func TestIsPalindrome(t *testing.T) {
 	t.Log(l.IsPalindrome())
 	l.Print()
 }
+
+func TestIsPalindrome2(t *testing.T) {
+	l := NewLinkedList()
+	str := "helleh"
+	for _, v := range str {
+		l.InsertToTail(string(v))
+	}
+	l.Print()
+	t.Log(l.IsPalindrome())
+	l.Print()
+}

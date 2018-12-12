@@ -146,7 +146,7 @@ func (this *LinkedList) Print() {
 }
 
 // 判断是否是回文字符串
-// 找到中间点，翻转前半部分链表，时间复杂度O(n)，空间复杂度O(1)
+// 思路一：找到中间点，翻转前半部分链表，时间复杂度O(n)
 func (this *LinkedList) IsPalindrome() bool {
 	switch this.length {
 	case 0:
@@ -193,6 +193,33 @@ func (this *LinkedList) IsPalindrome() bool {
 	}
 	this.head.next = pre
 	return isPalindrome
+}
+
+// 思路二：申请一个栈存储链表前半段，时间复杂度O(n)，空间复杂度O(n)
+func (this *LinkedList) isPalindrome2() bool {
+	len := this.length
+	switch len {
+	case 0:
+		return false
+	case 1:
+		return true
+	}
+	str := make([]string, 0, len/2)
+	cur := this.head
+	for i := uint(1); i <= len; i++ {
+		cur = cur.next
+		if len%2 != 0 && i == (len/2+1) { // 如果链表有奇数个节点，忽略中间节点
+			continue
+		}
+		if i <= len/2 { // 前半段入栈，后半段对比
+			str = append(str, cur.value.(string))
+		} else {
+			if str[len-i] != cur.value.(string) {
+				return false
+			}
+		}
+	}
+	return true
 }
 
 // 翻转链表

@@ -146,9 +146,54 @@ func (this *LinkedList) Print() {
 }
 
 // 判断是否是回文字符串
-// func IsPalindrome(l *LinkedList) bool {
+// 找到中间点，翻转前半部分链表，时间复杂度O(n)，空间复杂度O(1)
+func (this *LinkedList) IsPalindrome() bool {
+	switch this.length {
+	case 0:
+		return false
+	case 1:
+		return true
+	}
+	isPalindrome := true
+	step := this.length / 2
+	// 反转前半部分链表
+	var pre *ListNode = nil
+	cur := this.head.next
+	for i := uint(1); i <= step; i++ {
+		tmp := cur.next
+		cur.next = pre
+		pre = cur
+		cur = tmp
+	}
+	mid := cur
 
-// }
+	var left, right *ListNode = pre, nil
+	if this.length%2 != 0 {
+		right = mid.next
+	} else {
+		right = mid
+	}
+	for nil != left && nil != right {
+		if left.GetValue().(string) != right.GetValue().(string) {
+			isPalindrome = false
+			break
+		}
+		left = left.next
+		right = right.next
+	}
+
+	// 还原链表
+	cur = pre
+	pre = mid
+	for nil != cur {
+		tmp := cur.next
+		cur.next = pre
+		pre = cur
+		cur = tmp
+	}
+	this.head.next = pre
+	return isPalindrome
+}
 
 // 翻转链表
 func (this *LinkedList) ReverseLinkedList() {

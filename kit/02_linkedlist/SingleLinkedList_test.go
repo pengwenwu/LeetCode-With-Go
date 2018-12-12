@@ -67,3 +67,14 @@ func TestReverseLinkedList(t *testing.T) {
 	l.ReverseLinkedList()
 	l.Print()
 }
+
+func TestIsPalindrome(t *testing.T) {
+	l := NewLinkedList()
+	str := "helloworld"
+	for _, v := range str {
+		l.InsertToTail(string(v))
+	}
+	l.Print()
+	t.Log(l.IsPalindrome())
+	l.Print()
+}

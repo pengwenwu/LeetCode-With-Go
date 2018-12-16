@@ -238,3 +238,23 @@ func (this *LinkedList) ReverseLinkedList() {
 	}
 	this.head.next = pre
 }
+
+// 判断链表是否有环
+// 方法一： 双重遍历，时间复杂度O(n*n)，空间复杂度O(1)
+func (this *LinkedList) hasCycle() bool {
+	if this.length <= 2 {
+		return false
+	}
+	cur := this.head.next
+	for count := int(1); nil != cur; count++ {
+		new_cur := this.head.next
+		for new_count := 1; new_count < count; new_count++ {
+			if new_cur == cur {
+				return true
+			}
+			new_cur = new_cur.next
+		}
+		cur = cur.next
+	}
+	return false
+}

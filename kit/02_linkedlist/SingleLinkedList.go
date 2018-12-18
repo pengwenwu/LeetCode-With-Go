@@ -255,3 +255,19 @@ func (this *LinkedList) hasCycle() bool {
 	}
 	return false
 }
+
+// 方法二：HashSet存储，时间复杂度O(n)，空间复杂度O(n)
+
+// 方法三：快慢指针，时间复杂度O(n)，空间复杂度O(1)
+func (this *LinkedList) hasCycle2() bool {
+	slow := this.head.next
+	fast := this.head.next
+	for nil != fast && nil != fast.next {
+		slow = slow.next
+		fast = fast.next.next
+		if fast == slow {
+			return true
+		}
+	}
+	return false
+}

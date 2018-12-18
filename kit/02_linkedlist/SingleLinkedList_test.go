@@ -106,16 +106,9 @@ func TestHasCyCle(t *testing.T) {
 	node5.next = node6
 	node6.next = node7
 	node7.next = node4
-	fmt.Println(node1)
 
 	linked_list := NewLinkedList()
-	linked_list.InsertToTail(node1)
-	linked_list.InsertToTail(node2)
-	linked_list.InsertToTail(node3)
-	linked_list.InsertToTail(node4)
-	linked_list.InsertToTail(node5)
-	linked_list.InsertToTail(node6)
-	linked_list.InsertToTail(node7)
-	linked_list.Print()
+	linked_list.head.next = node1
+
 	t.Log(linked_list.hasCycle())
 }

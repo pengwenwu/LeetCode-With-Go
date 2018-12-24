@@ -17,6 +17,8 @@ import (
 	单链表反转
 	回文字符串判定
 	链表中环的检测
+	在一个有环链表中，如何找出链表的入环点？以及环长
+	判断两个单向链表是否相交，如果相交，求出交点
 	两个有序的链表合并
 */
 
@@ -270,4 +272,46 @@ func (this *LinkedList) hasCycle2() bool {
 		}
 	}
 	return false
+}
+
+// 获取有环链表入环点
+func (this *LinkedList) getEntryNodeOfLoop() interface{} {
+	slow := this.head.next
+	fast := this.head.next
+	for nil != fast && nil != fast.next {
+		slow = slow.next
+		fast = fast.next.next
+		if fast == slow {
+			break
+		}
+	}
+	// 相遇后慢指针返回链表头
+	slow = this.head.next
+	for slow != fast {
+		slow = slow.next
+		fast = fast.next
+	}
+	return slow
+}
+
+// 获取有环链表环长
+func (this *LinkedList) getCycleLengthOfLoop() uint {
+	slow := this.head.next
+	fast := this.head.next
+	for nil != fast && nil != fast.next {
+		slow = slow.next
+		fast = fast.next.next
+		if slow == fast {
+			break
+		}
+	}
+	slow = slow.next
+	fast = fast.next.next
+	var length uint = 1
+	for slow != fast {
+		slow = slow.next
+		fast = fast.next.next
+		length++
+	}
+	return length
 }

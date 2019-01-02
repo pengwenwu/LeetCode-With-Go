@@ -315,3 +315,9 @@ func (this *LinkedList) getCycleLengthOfLoop() uint {
 	}
 	return length
 }
+
+// 判断两个链表是否相交，以及获取第一个交点
+// 分有环和无环
+func hasIntersection(linked_list1 *LinkedList, linked_list2 *LinkedList) interface{} {
+	return 1000
+}

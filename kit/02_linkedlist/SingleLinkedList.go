@@ -319,5 +319,33 @@ func (this *LinkedList) getCycleLengthOfLoop() uint {
 // 判断两个链表是否相交，以及获取第一个交点
 // 分有环和无环
 func hasIntersection(linked_list1 *LinkedList, linked_list2 *LinkedList) interface{} {
-	return 1000
+	// 一个有环，一个无环，必然不相交
+	// 如果都是无环，判断最后一个节点是否相同
+	if !linked_list1.hasCycle2() && !linked_list2.hasCycle2() {
+		end1 := linked_list1.head.next
+		end2 := linked_list2.head.next
+		for end1.next != nil {
+			end1 = end1.next
+		}
+		for end2.next != nil {
+			end2 = end2.next
+		}
+		if end1 == end2 {
+			return true
+		}
+		return false
+	} else if linked_list1.hasCycle2() && linked_list2.hasCycle2() {
+		// 都有环，必然是同一个环，则判断A中的入环点是否在B中出现过
+		entryNode := linked_list1.getEntryNodeOfLoop()
+		cur := linked_list2.head.next
+		for cur != nil {
+			if cur == entryNode {
+				return true
+			}
+			cur = cur.next
+		}
+		return false
+	} else {
+		return false
+	}
 }

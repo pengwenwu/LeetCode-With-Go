@@ -192,12 +192,12 @@ func TestHasIntersection(t *testing.T) {
 	node4.next = node5
 	node5.next = node6
 	node6.next = node7
-	// node7.next = node4
+	// node7.next = node4 // 有环1->2->3->4->5->6->7->4
 
 	linked_list := NewLinkedList()
 	linked_list.head.next = node1
 
-	node8 := NewListNode(8)
+	node8 := NewListNode(8) // 8-9->10->6
 	node9 := NewListNode(9)
 	node10 := NewListNode(10)
 	node8.next = node9
@@ -206,7 +206,7 @@ func TestHasIntersection(t *testing.T) {
 	linked_list2 := NewLinkedList()
 	linked_list2.head.next = node8
 
-	linked_list.Print()
-	linked_list2.Print()
+	// linked_list.Print()
+	// linked_list2.Print()
 	t.Log(hasIntersection(linked_list, linked_list2))
 }

@@ -60,7 +60,8 @@ func TestFind(t *testing.T) {
 	}
 	arr.Print()
 
-	fmt.Println("查找第六个数")
+	fmt.Println("查找第6个数")
 	fmt.Println(arr.Find(5))
+	fmt.Println("查找第12个数")
 	fmt.Println(arr.Find(11))
 }

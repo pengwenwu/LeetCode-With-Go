@@ -87,6 +87,6 @@ func (this *Array) Delete(index uint) (int, error) {
 // 打印数组
 func (this *Array) Print() {
 	for i := uint(0); i < this.Len(); i++ {
-		fmt.Println(this.data[i])
+		fmt.Print(this.data[i], " ")
 	}
 }

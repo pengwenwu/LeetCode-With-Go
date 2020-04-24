@@ -89,4 +89,5 @@ func (this *Array) Print() {
 	for i := uint(0); i < this.Len(); i++ {
 		fmt.Print(this.data[i], " ")
 	}
+	fmt.Println()
 }

@@ -106,16 +106,16 @@ func TestLinkedList_DeleteNode(t *testing.T) {
 	l.Print()
 }
 
-//func TestReverseLinkedList(t *testing.T) {
-//	l := NewLinkedList()
-//	str := "hello"
-//	for _, v := range str {
-//		l.InsertToTail(string(v))
-//	}
-//	l.Print()
-//	l.ReverseLinkedList()
-//	l.Print()
-//}
+func TestLinkedList_ReverseLinkedList (t *testing.T) {
+	l := NewLinkedList()
+	str := "hello"
+	for _, v := range str {
+		l.InsertToTail(NewListNode(string(v)))
+	}
+	l.Print()
+	l.ReverseLinkedList()
+	l.Print()
+}
 //
 //func TestIsPalindrome(t *testing.T) {
 //	l := NewLinkedList()

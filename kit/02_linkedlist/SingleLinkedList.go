@@ -153,6 +153,28 @@ func (l *LinkedList) Print() {
 	fmt.Println(format)
 }
 
+
+// -----------------练习------------------
+// 翻转链表 (非递归方法)
+func (l *LinkedList) ReverseLinkedList() {
+	if l.head == nil || l.head.next == nil {
+		return
+	}
+	pre := l.head.next
+	cur := l.head.next.next
+	for cur != nil {
+		tmp := cur.next
+		cur.next = pre
+		pre = cur
+		cur = tmp
+	}
+	// 原来第一个节点要断开
+	l.head.next.next = nil
+	l.head.next = pre
+}
+// 翻转链表（递归方法）
+func (l *LinkedList) ReverseLinkedList2() *ListNode {
+}
 //
 //// 判断是否是回文字符串
 //// 思路一：找到中间点，翻转前半部分链表，时间复杂度O(n)
@@ -229,23 +251,6 @@ func (l *LinkedList) Print() {
 //		}
 //	}
 //	return true
-//}
-//
-//// 翻转链表
-//func (this *LinkedList) ReverseLinkedList() {
-//	if nil == this.head || nil == this.head.next || nil == this.head.next.next {
-//		return
-//	}
-//	pre := this.head.next
-//	cur := this.head.next.next
-//	pre.next = nil
-//	for nil != cur {
-//		tmp := cur.next
-//		cur.next = pre
-//		pre = cur
-//		cur = tmp
-//	}
-//	this.head.next = pre
 //}
 //
 //// 判断链表是否有环

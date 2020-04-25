@@ -159,16 +159,11 @@ func (l *LinkedList) ReverseLinkedList() {
 	if l.head == nil || l.head.next == nil {
 		return
 	}
-	pre := l.head.next
-	cur := l.head.next.next
+	var pre *ListNode
+	cur := l.head.next
 	for cur != nil {
-		tmp := cur.next
-		cur.next = pre
-		pre = cur
-		cur = tmp
+		cur.next, pre, cur = pre, cur, cur.next
 	}
-	// 原来第一个节点要断开
-	l.head.next.next = nil
 	l.head.next = pre
 }
 
@@ -212,83 +207,50 @@ func (l *LinkedList) IsPalindrome() bool {
 	}
 	return true
 }
+// 方法二：翻转链表前半部分 时间复杂度O(n)
+func (l *LinkedList) IsPalindrome2() bool {
+	len := l.length
+	switch len {
+	case 0:
+		return false
+	case 1:
+		return true
+	}
+	step := len/2
+	isPalindrome := true
+	//翻转前半部分链表
+	var pre *ListNode
+	cur := l.head.next
+	for i := uint(0); i < step; i ++ {
+		cur.next, pre, cur = pre, cur, cur.next
+	}
+	// 需要记住中间指针以便后续还原
+	mid := cur
+	var left, right *ListNode = pre, nil
+	if len%2 == 0 {
+		right = cur
+	} else {
+		right = cur.next
+	}
 
-//// 判断是否是回文字符串
-//// 思路一：找到中间点，翻转前半部分链表，时间复杂度O(n)
-//func (this *LinkedList) IsPalindrome() bool {
-//	switch this.length {
-//	case 0:
-//		return false
-//	case 1:
-//		return true
-//	}
-//	isPalindrome := true
-//	step := this.length / 2
-//	// 反转前半部分链表
-//	var pre *ListNode = nil
-//	cur := this.head.next
-//	for i := uint(1); i <= step; i++ {
-//		tmp := cur.next
-//		cur.next = pre
-//		pre = cur
-//		cur = tmp
-//	}
-//	mid := cur
-//
-//	var left, right *ListNode = pre, nil
-//	if this.length%2 != 0 {
-//		right = mid.next
-//	} else {
-//		right = mid
-//	}
-//	for nil != left && nil != right {
-//		if left.GetValue().(string) != right.GetValue().(string) {
-//			isPalindrome = false
-//			break
-//		}
-//		left = left.next
-//		right = right.next
-//	}
-//
-//	// 还原链表
-//	cur = pre
-//	pre = mid
-//	for nil != cur {
-//		tmp := cur.next
-//		cur.next = pre
-//		pre = cur
-//		cur = tmp
-//	}
-//	this.head.next = pre
-//	return isPalindrome
-//}
-//
-//// 思路二：申请一个栈存储链表前半段，时间复杂度O(n)，空间复杂度O(n)
-//func (this *LinkedList) isPalindrome2() bool {
-//	len := this.length
-//	switch len {
-//	case 0:
-//		return false
-//	case 1:
-//		return true
-//	}
-//	str := make([]string, 0, len/2)
-//	cur := this.head
-//	for i := uint(1); i <= len; i++ {
-//		cur = cur.next
-//		if len%2 != 0 && i == (len/2+1) { // 如果链表有奇数个节点，忽略中间节点
-//			continue
-//		}
-//		if i <= len/2 { // 前半段入栈，后半段对比
-//			str = append(str, cur.value.(string))
-//		} else {
-//			if str[len-i] != cur.value.(string) {
-//				return false
-//			}
-//		}
-//	}
-//	return true
-//}
+	for right != nil {
+		if left.value.(string) != right.value.(string) {
+			isPalindrome = false
+			break
+		}
+		left = left.next
+		right = right.next
+	}
+
+	// 还原链表
+	cur = pre
+	pre = mid
+	for cur != nil {
+		cur.next, pre, cur = pre, cur, cur.next
+	}
+	return isPalindrome
+}
+
 //
 //// 判断链表是否有环
 //// 方法一： 双重遍历，时间复杂度O(n*n)，空间复杂度O(1)

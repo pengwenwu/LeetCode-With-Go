@@ -153,9 +153,8 @@ func (l *LinkedList) Print() {
 	fmt.Println(format)
 }
 
-
 // -----------------练习------------------
-// 翻转链表 (非递归方法)
+// 翻转链表 (迭代方法)
 func (l *LinkedList) ReverseLinkedList() {
 	if l.head == nil || l.head.next == nil {
 		return
@@ -172,10 +171,48 @@ func (l *LinkedList) ReverseLinkedList() {
 	l.head.next.next = nil
 	l.head.next = pre
 }
+
 // 翻转链表（递归方法）
-func (l *LinkedList) ReverseLinkedList2() *ListNode {
+func (l *LinkedList) ReverseLinkedList2(node *ListNode) *ListNode {
+	if node == nil || node.next == nil {
+		l.head.next = node
+		return node
+	}
+	newHead := l.ReverseLinkedList2(node.next)
+	node.next.next = node
+	node.next = nil
+	return newHead
 }
-//
+
+// 回文字符串判断
+// 方法一：借用栈存储 时间复杂度O(n), 空间复杂度O(n)
+func (l *LinkedList) IsPalindrome() bool {
+	len := l.length
+	switch len {
+	case 0:
+		return false
+	case 1:
+		return true
+	}
+	queue := make([]string, 0, len/2)
+	isOdd := len%2 != 0
+	cur := l.head.next
+	for i := uint(1); i <= len; i++ {
+		if isOdd && i == (len/2+1) {
+			continue
+		}
+		if i <= len/2 {
+			queue = append(queue, cur.value.(string))
+		} else {
+			if queue[len-i] != cur.value.(string) {
+				return false
+			}
+		}
+		cur = cur.next
+	}
+	return true
+}
+
 //// 判断是否是回文字符串
 //// 思路一：找到中间点，翻转前半部分链表，时间复杂度O(n)
 //func (this *LinkedList) IsPalindrome() bool {

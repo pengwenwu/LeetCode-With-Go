@@ -116,28 +116,49 @@ func TestLinkedList_ReverseLinkedList (t *testing.T) {
 	l.ReverseLinkedList()
 	l.Print()
 }
-//
-//func TestIsPalindrome(t *testing.T) {
-//	l := NewLinkedList()
-//	str := "helloworld"
-//	for _, v := range str {
-//		l.InsertToTail(string(v))
-//	}
-//	l.Print()
-//	t.Log(l.IsPalindrome())
-//	l.Print()
-//}
-//
-//func TestIsPalindrome2(t *testing.T) {
-//	l := NewLinkedList()
-//	str := "helleh"
-//	for _, v := range str {
-//		l.InsertToTail(string(v))
-//	}
-//	l.Print()
-//	t.Log(l.IsPalindrome())
-//	l.Print()
-//}
+
+func TestLinkedList_ReverseLinkedList2(t *testing.T) {
+	l := NewLinkedList()
+	str := "hello"
+	for _, v := range str {
+		l.InsertToTail(NewListNode(string(v)))
+	}
+	l.Print()
+	l.ReverseLinkedList2(l.head.next)
+	l.Print()
+}
+
+func TestIsPalindrome(t *testing.T) {
+	l := NewLinkedList()
+	str := "helloworld"
+	for _, v := range str {
+		l.InsertToTail(NewListNode(string(v)))
+	}
+	l.Print()
+	fmt.Printf("%v 是否是回文字符串：%v\n", str, l.IsPalindrome())
+	l.Print()
+}
+func TestIsPalindrome2(t *testing.T) {
+	l := NewLinkedList()
+	str := "helleh"
+	for _, v := range str {
+		l.InsertToTail(NewListNode(string(v)))
+	}
+	l.Print()
+	fmt.Printf("%v 是否是回文字符串：%v\n", str, l.IsPalindrome())
+	l.Print()
+}
+
+func TestIsPalindrome3(t *testing.T) {
+	l := NewLinkedList()
+	str := "h"
+	for _, v := range str {
+		l.InsertToTail(NewListNode(string(v)))
+	}
+	l.Print()
+	fmt.Printf("%v 是否是回文字符串：%v\n", str, l.IsPalindrome())
+	l.Print()
+}
 //
 //func TestHasCyCle(t *testing.T) {
 //	node1 := NewListNode(1)

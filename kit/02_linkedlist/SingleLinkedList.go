@@ -207,7 +207,7 @@ func (l *LinkedList) IsPalindrome() bool {
 	}
 	return true
 }
-// 方法二：翻转链表前半部分 时间复杂度O(n)
+// 方法二：带头节点 翻转链表前半部分 时间复杂度O(n) 空间复杂度O(1)
 func (l *LinkedList) IsPalindrome2() bool {
 	len := l.length
 	switch len {
@@ -250,9 +250,58 @@ func (l *LinkedList) IsPalindrome2() bool {
 	}
 	return isPalindrome
 }
+// 方法三：无头节点 快慢指针 时间复杂度O(n) 空间复杂度O(1)
+func (l *LinkedList) IsPalindrome3() bool {
+	head := l.head.next
+	if head == nil {
+		return false
+	}
+	slow, fast := head, head
+	var pre, p *ListNode
+	for fast != nil && fast.next != nil {
+		p = slow
+		slow = slow.next
+		fast = fast.next.next
+		// 翻转链表
+		p.next = pre
+		pre = p
+	}
+
+	left := p // 记录左半链表头，方便还原
+	right := slow
+	// 奇数，过滤中点
+	if fast != nil {
+		slow = slow.next
+	}
+
+	isPalindrome := true
+	for slow != nil {
+		if p.value != slow.value {
+			isPalindrome = false
+			break
+		}
+		p = p.next
+		slow = slow.next
+	}
+
+	// 还原链表
+	pre = right
+	cur := left
+	for cur != nil {
+		cur.next, pre, cur = pre, cur, cur.next
+	}
+	l.head.next = pre
+
+	return isPalindrome
+}
 
 // 判断链表是否有环
+// 方法一：双重遍历 时间复杂度O(n*n) 空间复杂度O(1)
+//func (l *LinkedList) hasCycle() bool {
+//	cur := l.head.next
 //
+//}
+
 //// 判断链表是否有环
 //// 方法一： 双重遍历，时间复杂度O(n*n)，空间复杂度O(1)
 //func (this *LinkedList) hasCycle() bool {

@@ -192,6 +192,39 @@ func TestLinkedList_IsPalindrome23(t *testing.T) {
 	fmt.Printf("%v 是否是回文字符串：%v\n", str, l.IsPalindrome2())
 	l.Print()
 }
+
+func TestLinkedList_IsPalindrome3(t *testing.T) {
+	l := NewLinkedList()
+	str := "heleh"
+	for _, v := range str {
+		l.InsertToTail(NewListNode(string(v)))
+	}
+	l.Print()
+	fmt.Printf("%v 是否是回文字符串：%v\n", str, l.IsPalindrome3())
+	l.Print()
+}
+
+func TestLinkedList_IsPalindrome32(t *testing.T) {
+	l := NewLinkedList()
+	str := "helloworld"
+	for _, v := range str {
+		l.InsertToTail(NewListNode(string(v)))
+	}
+	l.Print()
+	fmt.Printf("%v 是否是回文字符串：%v\n", str, l.IsPalindrome3())
+	l.Print()
+}
+
+func TestLinkedList_IsPalindrome33(t *testing.T) {
+	l := NewLinkedList()
+	str := "h"
+	for _, v := range str {
+		l.InsertToTail(NewListNode(string(v)))
+	}
+	l.Print()
+	fmt.Printf("%v 是否是回文字符串：%v\n", str, l.IsPalindrome3())
+	l.Print()
+}
 //
 //func TestHasCyCle(t *testing.T) {
 //	node1 := NewListNode(1)

@@ -179,7 +179,7 @@ func (l *LinkedList) ReverseLinkedList2(node *ListNode) *ListNode {
 	return newHead
 }
 
-// 回文字符串判断
+// 回文链表判断
 // 方法一：借用栈存储 时间复杂度O(n), 空间复杂度O(n)
 func (l *LinkedList) IsPalindrome() bool {
 	len := l.length
@@ -251,6 +251,7 @@ func (l *LinkedList) IsPalindrome2() bool {
 	return isPalindrome
 }
 
+// 判断链表是否有环
 //
 //// 判断链表是否有环
 //// 方法一： 双重遍历，时间复杂度O(n*n)，空间复杂度O(1)

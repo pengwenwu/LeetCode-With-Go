@@ -18,11 +18,11 @@ import (
 	单链表反转
 	回文字符串判定
 	链表中环的检测
+	在一个有环链表中，如何找出链表的入环点？以及环长
+	判断两个单向链表是否相交，如果相交，求出交点
 	两个有序的链表合并
 	删除链表倒数第 n 个结点
 	求链表的中间结点
-	在一个有环链表中，如何找出链表的入环点？以及环长
-	判断两个单向链表是否相交，如果相交，求出交点
 */
 
 // 单链表节点
@@ -328,6 +328,9 @@ func (l *LinkedList) HasCycle2() bool {
 }
 
 // 获取有环链表入环点
+func (l *LinkedList) getEntryNodeOfLoop() *ListNode {
+
+}
 
 //func (this *LinkedList) getEntryNodeOfLoop() interface{} {
 //	slow := this.head.next

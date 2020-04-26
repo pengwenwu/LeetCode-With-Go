@@ -296,46 +296,39 @@ func (l *LinkedList) IsPalindrome3() bool {
 }
 
 // 判断链表是否有环
-// 方法一：双重遍历 时间复杂度O(n*n) 空间复杂度O(1)
-//func (l *LinkedList) hasCycle() bool {
-//	cur := l.head.next
-//
-//}
+// 方法一(不推荐)：双重遍历 时间复杂度O(n^2) 空间复杂度O(1)
+func (l *LinkedList) HasCycle() bool {
+	pre := l.head.next
+	cur := l.head.next.next
+	for cur != nil {
+		p := l.head.next
+		for p != pre {
+			if p == cur {
+				return true
+			}
+			p = p.next
+		}
+		pre = cur
+		cur = cur.next
+	}
+	return false
+}
+// 方法二：HashSet存储 时间复杂度O(n) 空间复杂度O(n)
+// 方法三：快慢指针 时间复杂度O(n) 空间复杂度O(1)
+func (l *LinkedList) HasCycle2() bool {
+	slow, fast := l.head.next, l.head.next
+	for fast != nil && fast.next != nil {
+		slow = slow.next
+		fast = fast.next.next
+		if slow == fast {
+			return true
+		}
+	}
+	return false
+}
 
-//// 判断链表是否有环
-//// 方法一： 双重遍历，时间复杂度O(n*n)，空间复杂度O(1)
-//func (this *LinkedList) hasCycle() bool {
-//	cur := this.head.next
-//	for count := int(1); nil != cur; count++ {
-//		new_cur := this.head.next
-//		for new_count := 1; new_count < count; new_count++ {
-//			if new_cur == cur {
-//				return true
-//			}
-//			new_cur = new_cur.next
-//		}
-//		cur = cur.next
-//	}
-//	return false
-//}
-//
-//// 方法二：HashSet存储，时间复杂度O(n)，空间复杂度O(n)
-//
-//// 方法三：快慢指针，时间复杂度O(n)，空间复杂度O(1)
-//func (this *LinkedList) hasCycle2() bool {
-//	slow := this.head.next
-//	fast := this.head.next
-//	for nil != fast && nil != fast.next {
-//		slow = slow.next
-//		fast = fast.next.next
-//		if fast == slow {
-//			return true
-//		}
-//	}
-//	return false
-//}
-//
-//// 获取有环链表入环点
+// 获取有环链表入环点
+
 //func (this *LinkedList) getEntryNodeOfLoop() interface{} {
 //	slow := this.head.next
 //	fast := this.head.next

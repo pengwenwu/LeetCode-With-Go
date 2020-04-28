@@ -328,28 +328,47 @@ func (l *LinkedList) HasCycle2() bool {
 }
 
 // 获取有环链表入环点
-func (l *LinkedList) getEntryNodeOfLoop() *ListNode {
+// 方法一（不推荐）：双重迭代
+func (l *LinkedList) GetEntryNodeOfLoop() *ListNode {
+	pre := l.head.next
+	cur := l.head.next.next
+	for cur != nil {
+		p := l.head.next
+		for p != pre {
+			if p == cur {
+				return cur
+			}
+			p = p.next
+		}
+		pre = cur
+		cur = cur.next
+	}
+	return nil
+}
+// 方法二：快慢指针
+// 2(L + S) = L + S + nR => L + S = nR => n=1时， L + S = R
+func (l *LinkedList) GetEntryNodeOfLoop2() *ListNode {
 
 }
 
-//func (this *LinkedList) getEntryNodeOfLoop() interface{} {
-//	slow := this.head.next
-//	fast := this.head.next
-//	for nil != fast && nil != fast.next {
-//		slow = slow.next
-//		fast = fast.next.next
-//		if fast == slow {
-//			break
-//		}
-//	}
-//	// 相遇后慢指针返回链表头
-//	slow = this.head.next
-//	for slow != fast {
-//		slow = slow.next
-//		fast = fast.next
-//	}
-//	return slow
-//}
+func (this *LinkedList) getEntryNodeOfLoop() *ListNode {
+	slow := this.head.next
+	fast := this.head.next
+	for nil != fast && nil != fast.next {
+		slow = slow.next
+		fast = fast.next.next
+		if fast == slow {
+			break
+		}
+	}
+	// 相遇后慢指针返回链表头
+	slow = this.head.next
+	for slow != fast {
+		slow = slow.next
+		fast = fast.next
+	}
+	return slow
+}
 //
 //// 获取有环链表环长
 //func (this *LinkedList) getCycleLengthOfLoop() uint {

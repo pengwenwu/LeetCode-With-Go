@@ -274,48 +274,49 @@ func TestLinkedList_HasCycle2(t *testing.T) {
 	fmt.Printf("添加一个有环节点后是否有环：%v\n", l.HasCycle2())
 }
 
-//func TestHasCyCle2(t *testing.T) {
-//	node1 := NewListNode(1)
-//	node2 := NewListNode(2)
-//	node3 := NewListNode(3)
-//	node4 := NewListNode(4)
-//	node5 := NewListNode(5)
-//	node6 := NewListNode(6)
-//	node7 := NewListNode(7)
-//	node1.next = node2
-//	node2.next = node3
-//	node3.next = node4
-//	node4.next = node5
-//	node5.next = node6
-//	node6.next = node7
-//	node7.next = node4
-//
-//	linked_list := NewLinkedList()
-//	linked_list.head.next = node1
-//
-//	t.Log(linked_list.hasCycle2())
-//}
-//
-//func TestGetEntryNodeOfLoop(t *testing.T) {
-//	node1 := NewListNode(1)
-//	node2 := NewListNode(2)
-//	node3 := NewListNode(3)
-//	node4 := NewListNode(4)
-//	node5 := NewListNode(5)
-//	node6 := NewListNode(6)
-//	node7 := NewListNode(7)
-//	node1.next = node2
-//	node2.next = node3
-//	node3.next = node4
-//	node4.next = node5
-//	node5.next = node6
-//	node6.next = node7
-//	node7.next = node4
-//
-//	linked_list := NewLinkedList()
-//	linked_list.head.next = node1
-//	t.Log(linked_list.getEntryNodeOfLoop())
-//}
+func TestLinkedList_GetEntryNodeOfLoop(t *testing.T) {
+	node1 := NewListNode(1)
+	node2 := NewListNode(2)
+	node3 := NewListNode(3)
+	node4 := NewListNode(4)
+	node5 := NewListNode(5)
+	node6 := NewListNode(6)
+	node7 := NewListNode(7)
+	node1.next = node2
+	node2.next = node3
+	node3.next = node4
+	node4.next = node5
+	node5.next = node6
+	node6.next = node7
+
+	l := NewLinkedList()
+	l.head.next = node1
+	l.Print()
+
+	node7.next = node4
+	fmt.Printf("添加一个有环节点后节点值：%v\n", l.GetEntryNodeOfLoop().value)
+}
+
+func TestGetEntryNodeOfLoop(t *testing.T) {
+	node1 := NewListNode(1)
+	node2 := NewListNode(2)
+	node3 := NewListNode(3)
+	node4 := NewListNode(4)
+	node5 := NewListNode(5)
+	node6 := NewListNode(6)
+	node7 := NewListNode(7)
+	node1.next = node2
+	node2.next = node3
+	node3.next = node4
+	node4.next = node5
+	node5.next = node6
+	node6.next = node7
+	node7.next = node4
+
+	linked_list := NewLinkedList()
+	linked_list.head.next = node1
+	t.Log(linked_list.getEntryNodeOfLoop().value)
+}
 //
 //func TestGetCycleLengthOfLoop(t *testing.T) {
 //	node1 := NewListNode(1)

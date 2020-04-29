@@ -18,7 +18,7 @@ import (
 	单链表反转
 	回文字符串判定
 	链表中环的检测
-	在一个有环链表中，如何找出链表的入环点？以及环长
+	在一个有环链表中，如何找出链表的入环点？以及环长，柄长
 	判断两个单向链表是否相交，如果相交，求出交点
 	两个有序的链表合并
 	删除链表倒数第 n 个结点
@@ -348,52 +348,70 @@ func (l *LinkedList) GetEntryNodeOfLoop() *ListNode {
 // 方法二：快慢指针
 // 2(L + S) = L + S + nR => L + S = nR => n=1时， L + S = R
 func (l *LinkedList) GetEntryNodeOfLoop2() *ListNode {
-
-}
-
-func (this *LinkedList) getEntryNodeOfLoop() *ListNode {
-	slow := this.head.next
-	fast := this.head.next
-	for nil != fast && nil != fast.next {
+	slow, fast := l.head.next, l.head.next
+	for fast.next != nil {
 		slow = slow.next
 		fast = fast.next.next
-		if fast == slow {
+		if slow == fast {
 			break
 		}
 	}
-	// 相遇后慢指针返回链表头
-	slow = this.head.next
+	// 慢指针回到起点
+	slow = l.head.next
 	for slow != fast {
 		slow = slow.next
 		fast = fast.next
 	}
 	return slow
 }
-//
-//// 获取有环链表环长
-//func (this *LinkedList) getCycleLengthOfLoop() uint {
-//	slow := this.head.next
-//	fast := this.head.next
-//	for nil != fast && nil != fast.next {
-//		slow = slow.next
-//		fast = fast.next.next
-//		if slow == fast {
-//			break
-//		}
-//	}
-//	slow = slow.next
-//	fast = fast.next.next
-//	var length uint = 1
-//	for slow != fast {
-//		slow = slow.next
-//		fast = fast.next.next
-//		length++
-//	}
-//	return length
-//}
-//
-//// 判断两个链表是否相交，以及获取第一个交点
-//// 分有环和无环
+
+// 获取有环链表到入口柄长
+func (l *LinkedList) GetLengthToEntry() uint {
+	slow, fast := l.head.next, l.head.next
+	for fast.next != nil {
+		slow = slow.next
+		fast = fast.next.next
+		if slow == fast {
+			break
+		}
+	}
+	// 慢指针回到起点
+	len := uint(0)
+	slow = l.head.next
+	for slow != fast {
+		slow = slow.next
+		fast = fast.next
+		len++
+	}
+	return len
+}
+
+// 获取有环链表环长 快慢指针，相遇后下一次相遇即为环长
+func (l *LinkedList) GetLengthOfLoop() uint {
+	slow, fast := l.head.next, l.head.next
+	for fast.next != nil {
+		slow = slow.next
+		fast = fast.next.next
+		if slow == fast {
+			break
+		}
+	}
+	len := uint(0)
+	slow = slow.next
+	fast = fast.next.next
+	for slow != fast {
+		slow = slow.next
+		fast = fast.next.next
+		len++
+	}
+	return len
+}
+
+// 判断两个链表是否相交，以及获取第一个交点
+// 分有环和无环
+func HasIntersection(l1 *LinkedList, l2 *LinkedList) bool {
+	
+}
 //func hasIntersection(linked_list1 *LinkedList, linked_list2 *LinkedList) interface{} {
 //	// 一个有环，一个无环，必然不相交
 //	// 如果都是无环，判断最后一个节点是否相同

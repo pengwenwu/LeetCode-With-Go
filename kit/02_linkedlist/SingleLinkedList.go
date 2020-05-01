@@ -409,37 +409,39 @@ func (l *LinkedList) GetLengthOfLoop() uint {
 
 // 判断两个链表是否相交，以及获取第一个交点
 // 分有环和无环
-func HasIntersection(l1 *LinkedList, l2 *LinkedList) bool {
-	
+func (l *LinkedList) HasIntersection(l1 *LinkedList, l2 *LinkedList) bool {
+	// 一个有环，一个无环必然不相交
+	// 都无环，只需判断终点是否相同
+	// 都有环，如果相交，必然是同一个环，判断入环点是否在另一个链表里出现
+	if !l1.HasCycle2() && !l2.HasCycle2() {
+		p1 := l1.head.next
+		p2 := l2.head.next
+		for p1 != nil && p2 != nil {
+			p1 = p1.next
+			p2 = p2.next
+		}
+		if p1 == p2 {
+			fmt.Println(p1.value)
+			return  true
+		}
+	} else if l1.HasCycle2() && l2.HasCycle2() {
+		// 如果入环点在环外，则入环点相同
+		entryPoint := l1.GetEntryNodeOfLoop2()
+		entryPoint2 :=l2.GetEntryNodeOfLoop2()
+		if entryPoint == entryPoint2 {
+			fmt.Println(entryPoint.value)
+			return true
+		}
+		// 如果入环点在环内，遍历环判断是否存在
+		p := entryPoint.next
+		for p != entryPoint {
+			if p == entryPoint2 {
+				fmt.Println(p.value)
+				return true
+			}
+			p = p.next
+		}
+	}
+	return false
 }
-//func hasIntersection(linked_list1 *LinkedList, linked_list2 *LinkedList) interface{} {
-//	// 一个有环，一个无环，必然不相交
-//	// 如果都是无环，判断最后一个节点是否相同
-//	if !linked_list1.hasCycle2() && !linked_list2.hasCycle2() {
-//		end1 := linked_list1.head.next
-//		end2 := linked_list2.head.next
-//		for end1.next != nil {
-//			end1 = end1.next
-//		}
-//		for end2.next != nil {
-//			end2 = end2.next
-//		}
-//		if end1 == end2 {
-//			return true
-//		}
-//		return false
-//	} else if linked_list1.hasCycle2() && linked_list2.hasCycle2() {
-//		// 都有环，必然是同一个环，则判断A中的入环点是否在B中出现过
-//		entryNode := linked_list1.getEntryNodeOfLoop()
-//		cur := linked_list2.head.next
-//		for cur != nil {
-//			if cur == entryNode {
-//				return true
-//			}
-//			cur = cur.next
-//		}
-//		return false
-//	} else {
-//		return false
-//	}
-//}
+

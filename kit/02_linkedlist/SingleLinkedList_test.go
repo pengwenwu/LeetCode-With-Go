@@ -403,35 +403,73 @@ func TestLinkedList_HasIntersection(t *testing.T) {
 
 	fmt.Printf("l1, l2是否相交：%+v\n", l1.HasIntersection(l1, l2))
 }
-//func TestHasIntersection(t *testing.T) {
-//	node1 := NewListNode(1)
-//	node2 := NewListNode(2)
-//	node3 := NewListNode(3)
-//	node4 := NewListNode(4)
-//	node5 := NewListNode(5)
-//	node6 := NewListNode(6)
-//	node7 := NewListNode(7)
-//	node1.next = node2
-//	node2.next = node3
-//	node3.next = node4
-//	node4.next = node5
-//	node5.next = node6
-//	node6.next = node7
-//	// node7.next = node4 // 有环1->2->3->4->5->6->7->4
-//
-//	linked_list := NewLinkedList()
-//	linked_list.head.next = node1
-//
-//	node8 := NewListNode(8) // 8-9->10->6
-//	node9 := NewListNode(9)
-//	node10 := NewListNode(10)
-//	node8.next = node9
-//	node9.next = node10
-//	node10.next = node6
-//	linked_list2 := NewLinkedList()
-//	linked_list2.head.next = node8
-//
-//	// linked_list.Print()
-//	// linked_list2.Print()
-//	t.Log(hasIntersection(linked_list, linked_list2))
-//}
+
+func TestLinkedList_MergeSortLinkedList(t *testing.T) {
+	node1 := NewListNode(1)
+	node2 := NewListNode(2)
+	node3 := NewListNode(3)
+	node4 := NewListNode(4)
+	node5 := NewListNode(5)
+	node6 := NewListNode(6)
+	node7 := NewListNode(7)
+	node1.next = node2
+	node2.next = node3
+	node3.next = node4
+	node4.next = node5
+	node5.next = node6
+	node6.next = node7  // 1-2-3-4-5-6-7
+
+	l1 := NewLinkedList()
+	l1.head.next = node1
+
+	node8 := NewListNode(8)
+	node9 := NewListNode(9)
+	node10 := NewListNode(10)
+	node8.next = node9
+	node9.next = node10 // 8-9-10
+
+	l2 := NewLinkedList()
+	l2.head.next = node8
+
+	l1.Print()
+	l2.Print()
+	l3 := l1.MergeSortLinkedList(l1, l2)
+	l3.Print()
+}
+
+func TestLinkedList_MergeSortLinkedList2(t *testing.T) {
+	node1 := NewListNode(1)
+	node2 := NewListNode(2)
+	node3 := NewListNode(3)
+	node4 := NewListNode(4)
+	node5 := NewListNode(5)
+	node6 := NewListNode(6)
+	node7 := NewListNode(7)
+	node1.next = node2
+	node2.next = node3
+	node3.next = node4
+	node4.next = node5
+	node5.next = node6
+	node6.next = node7  // 1-2-3-4-5-6-7
+
+	l1 := NewLinkedList()
+	l1.head.next = node1
+
+	node11 := NewListNode(-10)
+	node12 := NewListNode(0)
+	node13 := NewListNode(1)
+	node14 := NewListNode(6)
+	node15 := NewListNode(8)
+	node11.next = node12
+	node12.next = node13
+	node13.next = node14
+	node14.next = node15 // -10-0-1-6-8
+
+	l2 := NewLinkedList()
+	l2.head.next = node11
+
+	l1.Print()
+	l2.Print()
+	l3 := l1.MergeSortLinkedList(l1, l2)
+	l3.Print()
+}

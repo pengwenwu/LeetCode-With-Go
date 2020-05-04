@@ -3,6 +3,7 @@ package LinkedList
 import (
 	"errors"
 	"fmt"
+	"strconv"
 )
 
 /*
@@ -445,3 +446,38 @@ func (l *LinkedList) HasIntersection(l1 *LinkedList, l2 *LinkedList) bool {
 	return false
 }
 
+// 将两个链表表示的递增整数序列合并为一个非递减的整数序列
+func (l *LinkedList) MergeSortLinkedList(l1 *LinkedList, l2 *LinkedList) *LinkedList {
+	cur1, cur2 := l1.head.next, l2.head.next
+	newList := NewLinkedList()
+	var newCur *ListNode = newList.head
+	toInt := func(v interface{}) int {
+		tmp := fmt.Sprintf("%d", v)
+		value, err := strconv.Atoi(tmp)
+		if err != nil {
+			fmt.Println("string to int error")
+			return 0
+		}
+		return value
+	}
+	for cur1 != nil && cur2 != nil {
+		if toInt(cur2.value) < toInt(cur1.value) {
+			newCur.next = cur2
+			newCur = cur2
+			cur2 = cur2.next
+		} else {
+			newCur.next = cur1
+			newCur = cur1
+			cur1 = cur1.next
+		}
+	}
+
+	if cur1 != nil {
+		newCur.next = cur1
+	} else {
+		newCur.next = cur2
+	}
+	l1.head.next = nil
+	l2.head.next = nil
+	return newList
+}

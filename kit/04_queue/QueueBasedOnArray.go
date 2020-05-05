@@ -38,6 +38,7 @@ func (this *ArrayQueue) DeQueue() interface{} {
 func (this *ArrayQueue) Print() {
 	if this.head == this.tail {
 		fmt.Println("empty queue")
+		return
 	}
 	result := "head"
 	for i := this.head; i <= this.tail-1; i++ {

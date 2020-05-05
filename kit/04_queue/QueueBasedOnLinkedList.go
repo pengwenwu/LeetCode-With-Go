@@ -47,6 +47,7 @@ func (this *LinkedListQueue) DeQueue() interface{} {
 func (this *LinkedListQueue) Print() {
 	if this.head == nil {
 		fmt.Println("empty queue")
+		return
 	}
 	result := "head<-"
 	for cur := this.head; cur != nil; cur = cur.next {

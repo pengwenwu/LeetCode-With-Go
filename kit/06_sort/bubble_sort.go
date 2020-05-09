@@ -1,6 +1,6 @@
 package sort
 
-// 冒泡、插入、选择排序
+// 冒泡、插入、选择排序 时间复杂度O(n^2)
 func BubbleSort(arr []int, n int) []int {
 	if n <= 1 {
 		return arr

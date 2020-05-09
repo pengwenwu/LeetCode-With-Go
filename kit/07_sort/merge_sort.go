@@ -45,5 +45,5 @@ func merge(arr []int, start, mid, end int) {
 	}
 
 	// 覆盖至原有数组指定位置
-	copy(arr[start:end], tmpArr)
+	copy(arr[start:end+1], tmpArr)
 }

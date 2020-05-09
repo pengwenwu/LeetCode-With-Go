@@ -25,6 +25,7 @@ func BubbleSort(arr []int, n int) []int {
 	return arr
 }
 
+// 插入排序
 func InsertionSort(arr []int, n int) []int {
 	if n <= 1 {
 		return arr
@@ -40,6 +41,25 @@ func InsertionSort(arr []int, n int) []int {
 			}
  		}
  		arr[j+1] = value
+	}
+	return arr
+}
+
+// 选择排序
+func SelectionSort(arr []int, n int) []int {
+	if n <= 1 {
+		return arr
+	}
+	for i := 0; i < n; i++ {
+		minIndex := i
+		for j := i + 1; j < n; j++ {
+			if arr[j] < arr[minIndex] {
+				minIndex = j
+			}
+		}
+		tmp := arr[i]
+		arr[i] = arr[minIndex]
+		arr[minIndex] = tmp
 	}
 	return arr
 }

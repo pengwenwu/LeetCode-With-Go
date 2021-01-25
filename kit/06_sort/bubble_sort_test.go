@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-const ArrayLen = 100000
+const ArrayLen = 10000
 
 func TestBubbleSort(t *testing.T) {
 	var arr []int

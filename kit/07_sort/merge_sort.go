@@ -21,30 +21,32 @@ func mergeSort(arr []int, start, end int) {
 }
 
 func merge(arr []int, start, mid, end int) {
+	// 申请一个临时数组
 	tmpArr := make([]int, end-start+1)
 	i := start
 	j := mid + 1
 	k := 0
 	for ; i <= mid && j <= end; k++ {
-		if arr[i] <= arr[j] {
-			tmpArr[k] = arr[i]
-			i++
-		} else {
-			tmpArr[k] = arr[j]
-			j++
-		}
-	}
-	// 写入剩余数据
-	for ; i <= mid; i++ {
-		tmpArr[k] = arr[i]
-		k++
-	}
-	for ; j <= end; j++ {
-		tmpArr[k] = arr[j]
-		k++
-	}
+	    if arr[i] <= arr[j] {
+	        tmpArr[k] = arr[i]
+	        i++
+        } else {
+            tmpArr[k] = arr[j]
+            j++
+        }
+    }
 
-	// 覆盖至原有数组指定位置
+	// 补充剩余数据（此时只会有一个剩余）
+	for ; i <= mid; i++{
+	    tmpArr[k] = arr[i]
+	    k++
+    }
+	for ; j <= end; j++ {
+	    tmpArr[k] = arr[j]
+	    k++
+    }
+
+	// 覆盖原有数组
 	copy(arr[start:end+1], tmpArr)
 }
 
@@ -71,16 +73,14 @@ func partition(arr []int, start, end int) int {
 	// 默认选取最后一位为对比数组
 	pivot := arr[end]
 	i := start
-	for j:= start; j < end; j++ {
-		if arr[j] >= pivot {
-			continue
-		}
-		if i != j {
-			// 交换
-			arr[i], arr[j] = arr[j], arr[i]
-		}
-		i++
-	}
+	for j := start; j < end; j++ {
+	    if arr[j] < pivot {
+	        if i != j {
+	            arr[i], arr[j] = arr[j], arr[i]
+            }
+	        i++
+        }
+    }
 	arr[i], arr[end] = arr[end], arr[i]
 	return i
 }
